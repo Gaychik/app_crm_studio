@@ -1,0 +1,20 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<h1>Записи клиентов</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            {% for h in headers %}
+                               <td>{{h}}</td>
+                            {% endfor %}
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <td>{{appointment.date}} </td>   <td>{{appointment.client.name}} </td>  <td>{{appointment.client.phone}} </td>  <td>{{appointment.master.name}} </td>  <td>{{appointment.master.phone}} </td>   
+                     {% endfor %}
+                    </tbody>
+                </table>
+             
+{% endblock%}

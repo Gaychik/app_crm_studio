@@ -1,0 +1,22 @@
+{% extends 'global_admin/base.html' %}
+{% block content %}
+<h1>Мастера</h1>
+<table>
+    <thead>
+        <tr>
+            {% for h in headers %}
+               <td>{{h}}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for master in masters %}
+        <tr>
+            <td>{{master.id}} </td>   
+            <td>{{master.name}} </td>  
+            <td>{{master.phone}} </td> 
+        </tr>
+     {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

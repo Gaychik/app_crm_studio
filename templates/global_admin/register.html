@@ -1,0 +1,20 @@
+{% extends 'global_admin/base.html' %}
+
+{% block content%}
+    <div class="register-container"> 
+        <form method="post" action="{{url_for('register_master')}}" class="form">
+            <h2>Регистрация</h2> 
+            <label for="register-name">Имя Мастера</label> 
+            <input type="text" id="register-name" name="name" required> 
+            <label for="register-phone">Телефон</label> 
+            <input type="text" id="register-phone" name="phone" required> 
+            <button  type="submit" id="register-submit">Зарегистрировать</button> 
+        </form>
+    </div> 
+
+
+{% endblock %}
+
+
+
+

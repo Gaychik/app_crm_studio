@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css')
+ }}">
+ {% block link %} {% endblock %}
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+
+            <ul>
+                <li><a href="{{url_for('records',admin_id=master.id)}}">Записи клиентов</a></li>
+                <li><a href="{{url_for('appointments',admin_id=master.id)}}">История посещений</a></li>
+                <li><a href="{{url_for('admin_clients',admin_id=master.id)}}">Клиенты</a></li>
+            </ul>
+        </nav>
+        <main>
+            {% block header %} {% endblock %}
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+            {% endwith %}
+
+            {% block content %} {% endblock %}
+        </main>
+  </div>
+</body>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</html>
+

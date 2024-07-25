@@ -1,0 +1,24 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+<h1>Клиенты</h1>
+<table>
+    <thead>
+        <tr>
+            {% for h in headers %}
+               <td>{{h}}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in master.clients %}
+        <tr>
+             <td>{{client.id}} </td>   
+             <td>{{client.name}} </td>  
+             <td>{{client.phone}} </td> 
+             <td> {{client.comment}} </td> 
+             <td class="record"> <a href="{{ url_for('record',master_id=master.id,client_id=client.id) }}">Записать</a> </td>
+        </tr>
+     {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

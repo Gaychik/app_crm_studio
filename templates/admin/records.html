@@ -1,0 +1,38 @@
+{% extends 'admin/base.html' %}
+{% block header %}  <p class="header"> Записи на сегодня </p> {% endblock %}
+{% block content %}
+<div class="dashboard">
+<div>
+</div>
+        <table>
+            <thead>
+                <tr>
+                    {% for h in headers %}
+                        <td>{{h}}</td>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in master.records %}
+                <tr>
+                    <td>{{record.client.name}}</td> 
+                    <td>{{record.client.phone}}</td> 
+                    <td>{{record.date}}</td> 
+                    <td class="record"> <a href="{{ url_for('complete', record_id = record.id) }}">Завершить</a> </td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('profile_admin', admin_id=master.id, page=page-1) }}">Предыдущая</a>
+            {% endif %}
+            {% for p in range(1, total_pages + 1) %}
+                <a href="{{ url_for('profile_admin', admin_id=master.id, page=p) }}" class="{% if p == page %}active{% endif %}"> {{ p }} </a>
+            {% endfor %}
+            {% if page < total_pages %}
+                <a href="{{ url_for('profile_admin', admin_id=master.id, page=page+1) }}">Следующая</a>
+            {% endif %}
+        </div>
+</div>
+{% endblock %}

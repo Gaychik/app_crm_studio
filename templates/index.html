@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{%  extends 'base.html' %}
+
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<div class="container"> 
+    <div class="login-container"> 
+       
+        <form method="post" action="{{ url_for('login') }}" class="form">
+            <h2>Вход</h2> 
+            <label for="login-phone">Телефон</label> 
+            
+            <input type="text" id="login-phone" name="phone"  required> 
+            <button   type="submit" id="login-submit">Войти</button> 
+        </form>
+        <button id="flip-register">Быстрая регистрация</button> 
+    </div> 
+    <div class="register-container hidden"> 
+        <form method="post" action="{{ url_for('register_client') }}" class="form">
+            <h2>Регистрация</h2> 
+            <label for="register-name">Имя</label> 
+            <input type="text" id="register-name" name="name" required> 
+            <label for="register-phone">Телефон</label> 
+            <input type="text" id="register-phone" name="phone" required> 
+            <label for="register-email">Email</label> 
+            <input type="email" id="register-email" name="email" required> 
+            <button  type="submit" id="register-submit">Зарегистрироваться</button> 
+        </form>
+        <button id="flip-login">Вход</button> 
+    </div> 
+</div> 
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+<script src="{{ url_for('static', filename='js/handle_phone.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,95 @@
+.profile {
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile h2 {
+  margin-bottom: 10px;
+}
+
+.profile p {
+  color: #666;
+}
+
+.discount-badge {
+  display: inline-block;
+  background-color: #ff9800;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.profile h3 {
+  margin-top: 20px;
+}
+
+.profile ul {
+  text-align: left;
+  padding-left: 0;
+}
+
+.profile li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+#message {
+  width: calc(100% - 40px);
+  max-width: calc(100% - 40px);
+  height: 100px;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+#sendMessage {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.appointments-list {
+  list-style: none;
+  padding: 0;
+}
+
+.appointments-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination a {
+  padding: 8px 16px;
+  margin: 0 4px;
+  background: #007BFF;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.pagination a.active {
+  background: #0056b3;
+}
+
+.pagination a:hover {
+  background: #0056b3;
+}

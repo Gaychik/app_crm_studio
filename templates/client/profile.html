@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+    <div class="profile">
+        <img src="{{ url_for('static', filename='images/')+client.avatar }}">
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_avatar',client_id=client.id)}}">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+        <h2>{{ client.name }}</h2>
+        <p>Ваш номер: {{ client.phone }}</p>
+        {% if client.appointments|length > 0 and client.appointments|length % 5 == 0 %}
+        <span class="discount-badge">Доступна скидка</span>
+        {% endif %}
+        {% if client.master %}
+            <h2>Текущий мастер</h2>
+            <p>{{ client.master.name }}</p>
+            <p>{{ client.master.phone }}</p>
+            <p>
+                <a href="https://wa.me/{{ client.master.phone }}" target="_blank">Message on WhatsApp</a> |
+                <a href="https://t.me/{{ client.master.phone }}" target="_blank">Message on Telegram</a>
+            </p>
+        {% else %}
+              <h2>Мастер не назначен</h2>
+        {% endif %}
+
+        {% if role == 'global_admin'%}
+        <form method="post" action="{{ url_for('set_master_to_client',client_id=client.id)  }}">
+              <label for="master">Выберите мастера</label><br>
+              <select id="master" name="select_master">
+                      {% for master in masters%}
+                          <option>{{master.name}} - {{master.phone}}</option>
+                      {% endfor %}
+              </select>
+              <input type="submit" value="Назначить">
+        </form>
+      {% endif %}
+
+        <h3>История посещений</h3>
+        <ul class="appointments-list">
+            {% for appointment in client.appointments %}
+                <li>{{ appointment.date }} - {{ appointment.service }}</li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('profile_client', client_id=client.id, page=page-1) }}">Предыдущая</a>
+            {% endif %}
+            {% for p in range(1, total_pages + 1) %}
+                <a href="{{ url_for('profile_client', client_id=client.id, page=p) }}" class="{% if p == page %}active{% endif %}"> {{ p }} </a>
+            {% endfor %}
+            {% if page < total_pages %}
+                <a href="{{ url_for('profile_client', client_id=client.id, page=page+1) }}">Следующая</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+

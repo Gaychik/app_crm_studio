@@ -1,0 +1,25 @@
+{% extends 'global_admin/base.html' %}
+{% block content %}
+<h1>Клиенты</h1>
+<table>
+    <thead>
+        <tr>
+            {% for h in headers %}
+               <td>{{h}}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td>{{client.id}} </td>   
+            <td>{{client.name}} </td>  
+            <td>{{client.phone}} </td> 
+            <td> {{client.master.name}} </td>
+            <td> {{client.master.phone}} </td>
+            <td class="record"> <a href="{{ url_for('profile_client',client_id=client.id, role='global_admin') }}">Назначить нового мастера</a> </td>
+        </tr>
+     {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
