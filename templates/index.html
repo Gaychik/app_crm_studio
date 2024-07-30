@@ -10,8 +10,11 @@
         <form method="post" action="{{ url_for('login') }}" class="form">
             <h2>Вход</h2> 
             <label for="login-phone">Телефон</label> 
-            
             <input type="text" id="login-phone" name="phone"  required> 
+            <div class="form-component">  
+                <label for="is_master">Вы мастер?</label>  
+                <input type="checkbox" id="is_master" name="is_master">  
+            </div>  
             <button   type="submit" id="login-submit">Войти</button> 
         </form>
         <button id="flip-register">Быстрая регистрация</button> 

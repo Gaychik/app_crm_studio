@@ -1,5 +1,5 @@
 {% extends 'admin/base.html' %}
-{% block header %}  <p class="header"> Записи на сегодня </p> {% endblock %}
+{% block header %}  <h1> Ближайшие записи </h1> {% endblock %}
 {% block content %}
 <div class="dashboard">
 <div>
@@ -18,7 +18,8 @@
                     <td>{{record.client.name}}</td> 
                     <td>{{record.client.phone}}</td> 
                     <td>{{record.date}}</td> 
-                    <td class="record"> <a href="{{ url_for('complete', record_id = record.id) }}">Завершить</a> </td>
+                    <td class="complete_record_btn"> <a href="{{ url_for('complete', record_id = record.id) }}">Завершить</a> </td>
+                    <td class="cancel_record_btn"> <a href="{{ url_for('cancel', record_id = record.id) }}">Отменить</a> </td>
                 </tr> 
                 {% endfor %}
             </tbody>

@@ -1,7 +1,5 @@
 {% extends 'admin/base.html' %}
-{%block link%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/record.css') }}">
-{%endblock%}
+
 
 {% block header %}  <h1>Запись клиента</h1> {% endblock %}
 
@@ -17,7 +15,7 @@
     </div>
     <div>
         <label for="date">Дата</label><br>
-        <input type="date" id="date" name="date" required>
+        <input type="datetime-local" id="date" name="date"> 
     </div>
 
     <div>

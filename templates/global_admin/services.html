@@ -1,0 +1,24 @@
+{% extends 'global_admin/base.html' %}
+{% block content %}
+<h1>Ваши виды услуг</h1>
+<table>
+    <thead>
+        <tr>
+            {% for h in headers %}
+               <td>{{h}}</td>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for service in services %}
+        <tr>
+            <td>{{service.id}} </td>   
+            <td>{{service.name}} </td>  
+            <td>{{service.price}} </td> 
+            <td>{{service.revenue_selected_period}}</td>
+            <td class="del_service_btn"> <a href="{{ url_for('quit_service', service_id = service.id) }}">Удалить</a> </td>
+        </tr>
+     {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

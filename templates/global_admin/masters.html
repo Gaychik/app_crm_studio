@@ -15,6 +15,7 @@
             <td>{{master.id}} </td>   
             <td>{{master.name}} </td>  
             <td>{{master.phone}} </td> 
+            <td class="del_master_btn"> <a href="{{ url_for('quit_master', master_id = master.id) }}">Удалить</a> </td>
         </tr>
      {% endfor %}
     </tbody>

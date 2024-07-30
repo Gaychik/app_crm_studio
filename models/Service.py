@@ -4,4 +4,6 @@ class Service(Base):
     id=Column(Integer,primary_key=True,autoincrement=True)
     name=Column(String)
     price=Column(Integer)
-    appointments= relationship('Appointment',back_populates='service')
+    revenue_selected_period=Column(Integer,default=0)
+    records=relationship('Record',back_populates='service')
+    

@@ -10,3 +10,4 @@ class Record(Base):
     service_id=Column(Integer,ForeignKey('services.id'))
     client= relationship('Client',back_populates='record')
     master=relationship('Master',back_populates='records')
+    service=relationship('Service',back_populates='records')

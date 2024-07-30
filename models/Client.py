@@ -10,10 +10,9 @@ class Client(Base):
     email=Column(String,nullable=True)
     phone=Column(String)
     avatar=Column(String,nullable=True)
-    comment=Column(String,nullable=True)
+    comment=Column(String,nullable=True,default="Отсутствует")
     master_id=Column(Integer,ForeignKey('masters.id', ondelete='SET NULL'))
     master= relationship('Master',back_populates='clients')
-    appointments= relationship('Appointment',back_populates='client')
     record = relationship('Record',back_populates='client')
 
 
