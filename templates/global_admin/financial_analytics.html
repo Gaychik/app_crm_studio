@@ -1,0 +1,23 @@
+{% extends 'global_admin/base.html' %}
+{%block link%} <link rel="stylesheet" href="{{ url_for('static', filename='css/global_admin.css')
+}}"> {% endblock %}
+{% block content %}
+<h1>Финансовый учет</h1>
+
+<form method="get" action="{{url_for('global_admin_view')}}" class="form-container">
+    <label for="month">Выберите месяц</label><br>
+    <select id="month" name="selected_month" class="dropdown">
+        {% for name in months %}
+            <option>{{name}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Обновить" class="submit-button">
+</form>
+
+{% if selected_month %}
+    <div class="result-container">
+        <p>Общая выручка: <span>{{total}}</span></p>
+        <p>Количество обслуженных клиентов: <span>{{count}}</span></p>
+    </div>
+{% endif %}
+{% endblock %}

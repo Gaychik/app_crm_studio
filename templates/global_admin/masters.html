@@ -1,7 +1,9 @@
 {% extends 'global_admin/base.html' %}
+{%block link%} <link rel="stylesheet" href="{{ url_for('static', filename='css/global_admin_masters.css')
+}}"> {% endblock %}
 {% block content %}
 <h1>Мастера</h1>
-<table>
+<table class="styled-table">
     <thead>
         <tr>
             {% for h in headers %}
@@ -12,12 +14,12 @@
     <tbody>
         {% for master in masters %}
         <tr>
-            <td>{{master.id}} </td>   
-            <td>{{master.name}} </td>  
-            <td>{{master.phone}} </td> 
-            <td class="del_master_btn"> <a href="{{ url_for('quit_master', master_id = master.id) }}">Удалить</a> </td>
+            <td>{{master.id}}</td>   
+            <td>{{master.name}}</td>  
+            <td>{{master.phone}}</td> 
+            <td class="del_master_btn"><a href="{{ url_for('quit_master', master_id=master.id) }}">Удалить</a></td>
         </tr>
-     {% endfor %}
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

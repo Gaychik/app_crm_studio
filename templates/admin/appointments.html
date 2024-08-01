@@ -1,6 +1,7 @@
 {% extends 'admin/base.html' %}
 {% block content %}
 <h1>Записи клиентов</h1>
+<div class="dashboard">
                 <table>
                     <thead>
                         <tr>
@@ -15,12 +16,22 @@
                         <td>{{appointment.date}} </td>   
                         <td>{{appointment.client.name}} </td>
                         <td>{{appointment.client.phone}} </td> 
-                        <td>{{appointment.master.name}} </td>  
-                        <td>{{appointment.master.phone}} </td>   
                         <td>{{appointment.service.name}} </td>
+                        <td>{{appointment.status}} </td>
                     </tr>
                      {% endfor %}
                     </tbody>
                 </table>
-             
+                <div class="pagination">
+                    {% if page > 1 %}
+                        <a href="{{ url_for('appointments', admin_id=master.id, page=page-1) }}">Предыдущая</a>
+                    {% endif %}
+                    {% for p in range(1, total_pages + 1) %}
+                        <a href="{{ url_for('appointments', admin_id=master.id, page=p) }}" class="{% if p == page %}active{% endif %}"> {{ p }} </a>
+                    {% endfor %}
+                    {% if page < total_pages %}
+                        <a href="{{ url_for('appointments', admin_id=master.id, page=page+1) }}">Следующая</a>
+                    {% endif %}
+                </div>
+            </div>
 {% endblock%}

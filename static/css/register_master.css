@@ -1,18 +1,11 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #f7f7f7;
 }
-h1 {
-    color: #333;
-    text-align: center;
-}
-.form-container {
+.form {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -21,18 +14,24 @@ h1 {
     max-width: 400px;
     width: 100%;
 }
-label {
+.form h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+.form label {
+    display: block;
     font-size: 1.2em;
     color: #555;
+    margin-bottom: 10px;
 }
-.dropdown {
-    width: 100%;
+.form input {
+    width: calc(100% - 20px);
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.submit-button {
+.form button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -41,23 +40,6 @@ label {
     cursor: pointer;
     font-size: 1em;
 }
-.submit-button:hover {
+.form button:hover {
     background-color: #45a049;
-}
-.result-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 20px;
-}
-.result-container p {
-    font-size: 1.2em;
-    color: #333;
-    margin: 10px 0;
-}
-.result-container span {
-    font-weight: bold;
-    color: #4CAF50;
 }

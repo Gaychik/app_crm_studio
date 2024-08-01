@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Integer, Column, String, ForeignKey,DateTime
+from sqlalchemy import create_engine, Integer, Column, String, ForeignKey,DateTime,extract,func,and_
 from sqlalchemy.orm import relationship, sessionmaker, declarative_base
 #Функция создает подключение к бд и создает обертку над подключением.
 engine = create_engine('sqlite:///studio.db', echo=True)

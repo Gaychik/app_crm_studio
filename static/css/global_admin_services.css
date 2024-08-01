@@ -20,8 +20,9 @@ h1 {
     text-align: center;
     max-width: 400px;
     width: 100%;
+    margin-bottom: 20px;
 }
-label {
+.form-container label {
     font-size: 1.2em;
     color: #555;
 }
@@ -44,20 +45,40 @@ label {
 .submit-button:hover {
     background-color: #45a049;
 }
-.result-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+    text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 20px;
+    background-color: #fff;
 }
-.result-container p {
-    font-size: 1.2em;
-    color: #333;
-    margin: 10px 0;
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
 }
-.result-container span {
-    font-weight: bold;
-    color: #4CAF50;
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+.del_service_btn a {
+    color: #d9534f;
+    text-decoration: none;
+}
+.del_service_btn a:hover {
+    text-decoration: underline;
 }

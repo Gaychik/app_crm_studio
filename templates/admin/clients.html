@@ -1,7 +1,9 @@
 {% extends 'admin/base.html' %}
-{% block content %}
 
 {% block header %}  <h1>Клиенты</h1> {% endblock %}
+{% block content %}
+
+
 <table>
     <thead>
         <tr>
@@ -17,7 +19,7 @@
              <td>{{client.name}} </td>  
              <td>{{client.phone}} </td> 
              <td> {{client.comment}} </td> 
-             <td class="record"> <a href="{{ url_for('record',master_id=master.id,client_id=client.id) }}">Записать</a> </td>
+             <td class="td-btn"> <a href="{{ url_for('record',master_id=master.id,client_id=client.id) }}">Записать</a> </td>
         </tr>
      {% endfor %}
     </tbody>

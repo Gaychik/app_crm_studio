@@ -20,7 +20,13 @@ def profile_admin(admin_id):
 def appointments(admin_id):
     master=get_master(admin_id)
     visits=session.query(Appointment).filter_by(master_id=admin_id).all()
-    return custom_render("/appointments",headers=['date','client_name','client_phone','master_name','master_phone','service_name'],appointments=visits,master=master)
+    for appointment in visits:  
+            appointment.date = appointment.date.date()  
+    per_page = 5
+    page = request.args.get('page', 1, type=int)
+    total_pages = math.ceil(len(visits) / per_page)
+    visits =  visits[(page - 1) * per_page:page * per_page]  
+    return custom_render("/appointments",headers=['date','client_name','client_phone','service_name','status'],appointments=visits,master=master,page=page,total_pages=total_pages)
 
 
 
@@ -56,13 +62,15 @@ def records(admin_id):
 
 
 
-@app.route(base_path+"/complete/<int:record_id>")
-def complete(record_id):
+@app.route(base_path+"/complete/<int:record_id>/<status>")
+def complete(record_id,status):
       cur_record=session.query(Record).filter_by(id=record_id).first()
+      date_obj=datetime.fromisoformat(str(cur_record.date))
       new_appointment=Appointment(client_id=cur_record.client_id,
                                   master_id=cur_record.master_id,
                                   service_id=cur_record.service_id,
-                                  date=cur_record.date,
+                                  date=date_obj.date(),
+                                  status=status,
                                   client=cur_record.client,
                                   master=cur_record.master,
                                   service=cur_record.service
@@ -72,9 +80,9 @@ def complete(record_id):
       session.commit()
       return redirect(url_for('records',admin_id=cur_record.master_id))
 
-@app.route(base_path+"/cancel/<int:record_id>")
-def cancel(record_id):
-    pass
+
+
+    
 
 @app.route(base_path+'/booking/<int:admin_id>',methods=['POST'])
 def booking(admin_id):

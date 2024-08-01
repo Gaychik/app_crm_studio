@@ -7,7 +7,7 @@ class Appointment(Base):
     master_id = Column(Integer, ForeignKey('masters.id', ondelete='CASCADE'))
     service_id = Column(Integer, ForeignKey('services.id', ondelete='CASCADE'))
     date = Column(DateTime, default=datetime.now)
-    
+    status = Column(String)
     client = relationship("Client", backref="appointments")
     master = relationship("Master", backref="appointments")
     service = relationship("Service", backref="appointments")

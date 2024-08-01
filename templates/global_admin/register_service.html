@@ -1,16 +1,15 @@
 {% extends 'global_admin/base.html' %}
-
-{% block content%}
-    <div class="register-container"> 
-        <form method="post" action="{{url_for('register_service')}}" class="form">
-            <h2>Добавление услуги</h2> 
-            <label for="register-name">Название услуги</label> 
-            <input type="text" id="register-name" name="name" required> 
-            <label for="register-price">Цена</label> 
-            <input type="text" id="register-price" name="price" required> 
-            <button  type="submit" id="register-submit">Добавить</button> 
-        </form>
-    </div> 
-
-
+{%block link%} <link rel="stylesheet" href="{{ url_for('static', filename='css/register_service.css')
+}}"> {% endblock %}
+{% block content %}
+<div class="register-container"> 
+    <form method="post" action="{{url_for('register_service')}}" class="form">
+        <h2>Добавление услуги</h2> 
+        <label for="register-name">Название услуги</label> 
+        <input type="text" id="register-name" name="name" required> 
+        <label for="register-price">Цена</label> 
+        <input type="text" id="register-price" name="price" required> 
+        <button type="submit" id="register-submit">Добавить</button> 
+    </form>
+</div>
 {% endblock %}

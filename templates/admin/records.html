@@ -2,8 +2,7 @@
 {% block header %}  <h1> Ближайшие записи </h1> {% endblock %}
 {% block content %}
 <div class="dashboard">
-<div>
-</div>
+    <div>
         <table>
             <thead>
                 <tr>
@@ -18,21 +17,22 @@
                     <td>{{record.client.name}}</td> 
                     <td>{{record.client.phone}}</td> 
                     <td>{{record.date}}</td> 
-                    <td class="complete_record_btn"> <a href="{{ url_for('complete', record_id = record.id) }}">Завершить</a> </td>
-                    <td class="cancel_record_btn"> <a href="{{ url_for('cancel', record_id = record.id) }}">Отменить</a> </td>
+                    <td class="td-btn"> <a href="{{ url_for('complete', record_id = record.id,status='Завершено') }}">Завершить</a> </td>
+                    <td class="td-btn"> <a href="{{ url_for('complete', record_id = record.id, status='Отмена') }}">Отменить</a> </td>
                 </tr> 
                 {% endfor %}
             </tbody>
         </table>
+    </div>
         <div class="pagination">
             {% if page > 1 %}
-                <a href="{{ url_for('profile_admin', admin_id=master.id, page=page-1) }}">Предыдущая</a>
+                <a href="{{ url_for('records', admin_id=master.id, page=page-1) }}">Предыдущая</a>
             {% endif %}
             {% for p in range(1, total_pages + 1) %}
-                <a href="{{ url_for('profile_admin', admin_id=master.id, page=p) }}" class="{% if p == page %}active{% endif %}"> {{ p }} </a>
+                <a href="{{ url_for('records', admin_id=master.id, page=p) }}" class="{% if p == page %}active{% endif %}"> {{ p }} </a>
             {% endfor %}
             {% if page < total_pages %}
-                <a href="{{ url_for('profile_admin', admin_id=master.id, page=page+1) }}">Следующая</a>
+                <a href="{{ url_for('records', admin_id=master.id, page=page+1) }}">Следующая</a>
             {% endif %}
         </div>
 </div>

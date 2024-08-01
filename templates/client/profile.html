@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 </head>
 <body>
-    <div class="profile">
-        <img src="{{ url_for('static', filename='images/')+client.avatar }}">
-        <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_avatar',client_id=client.id)}}">
+   <div class="profile">
+        <img src="{{ url_for('static', filename='images/') + client.avatar }}">
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_avatar', client_id=client.id) }}">
             <input type="file" name="file">
             <input type="submit" value="Upload">
         </form>
@@ -23,29 +23,29 @@
             <p>{{ client.master.name }}</p>
             <p>{{ client.master.phone }}</p>
             <p>
-                <a href="https://wa.me/{{ client.master.phone }}" target="_blank">Message on WhatsApp</a> |
-                <a href="https://t.me/{{ client.master.phone }}" target="_blank">Message on Telegram</a>
+                <a href="https://wa.me/{{handler_phone_master}}" target="_blank">Message on WhatsApp</a> |
+                <a href="https://t.me/{{ handler_phone_master }}" target="_blank">Message on Telegram</a>
             </p>
         {% else %}
-              <h2>Мастер не назначен</h2>
+            <h2>Мастер не назначен</h2>
         {% endif %}
 
-        {% if role == 'global_admin'%}
-        <form method="post" action="{{ url_for('set_master_to_client',client_id=client.id)  }}">
-              <label for="master">Выберите мастера</label><br>
-              <select id="master" name="select_master">
-                      {% for master in masters%}
-                          <option>{{master.name}} - {{master.phone}}</option>
-                      {% endfor %}
-              </select>
-              <input type="submit" value="Назначить">
+        {% if role == 'global_admin' %}
+        <form method="post" action="{{ url_for('set_master_to_client', client_id=client.id) }}">
+            <label for="master">Выберите мастера</label><br>
+            <select id="master" name="select_master">
+                {% for master in masters %}
+                    <option>{{ master.name }} - {{ master.phone }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Назначить">
         </form>
-      {% endif %}
+        {% endif %}
 
         <h3>История посещений</h3>
         <ul class="appointments-list">
             {% for appointment in client.appointments %}
-                <li>{{ appointment.date }} - {{ appointment.service }}</li>
+                <li>{{ appointment.date.date() }} - {{ appointment.service.name }}</li>
             {% endfor %}
         </ul>
         <div class="pagination">

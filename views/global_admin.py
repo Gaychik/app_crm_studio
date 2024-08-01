@@ -1,7 +1,39 @@
 from validations import *
-from models.init_models import Master,session,Client,Service
+from models.init_models import Master,session,Client,Service,Appointment,extract,func,and_
 from main import *
+import datetime 
+import locale
 scope_name='/global_admin/'
+
+def get_months():
+    locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
+    months=[]
+    for i in range(1,13):
+          months.append(datetime.date(2000,i,1).strftime('%B'))
+    return months
+
+@app.route(scope_name)
+def global_admin_view():
+     selected_month=request.args.get('selected_month',datetime.datetime.now().strftime('%B'))
+     months=get_months()
+    #  appointments=session.query(Appointment).filter_by(status="Завершено").all()
+     selected_month=datetime.datetime.strptime(selected_month,'%B').month
+
+     result = session.query(    
+       Appointment
+     ).filter(
+          and_(extract('month', Appointment.date) == selected_month,
+                Appointment.status =="Завершено")
+                ).all() 
+     total_price=0
+     row_count=0
+     for appointment in result:
+          if selected_month ==  appointment.date.month:
+              row_count+=1
+              total_price+=appointment.service.price
+     return render_template(scope_name+'financial_analytics.html',months=months,selected_month=selected_month,count=row_count,total=total_price)
+
+
 @app.route(scope_name+'register_master',methods=['GET'])
 def global_admin_register_master_view():
      return render_template(scope_name+'register_master.html')
@@ -17,8 +49,26 @@ def global_admin_clients():
      
 @app.route(scope_name+"services")
 def global_admin_services():
-    services=session.query(Service).all()
-    return render_template(scope_name+"services.html", headers=['id','name','price','revenue for the selected period'],  services=services)
+    months=get_months()
+    selected_month=request.args.get('selected_month',datetime.datetime.now().strftime('%B'))
+    selected_month=datetime.datetime.strptime(selected_month,'%B').month
+    query:list[tuple[Service,int]] = (  
+    session.query(Service, func.sum(Service.price).label('total_price'))  
+    .join(Appointment, Appointment.service_id == Service.id)
+    .filter(
+          and_(extract('month', Appointment.date) == selected_month,
+                Appointment.status =="Завершено")
+                )
+    .group_by(Service.id)  
+    .all()  
+)   
+    services=[]
+    for item in query:
+        item[0].revenue_selected_period=item[1]
+        services.append(item[0])
+         
+    
+    return render_template(scope_name+"services.html", headers=['id','name','price','revenue for the selected period'],  services=services,months=months,selected_month=selected_month)
 
 
 @app.route(scope_name+"masters")
@@ -74,16 +124,15 @@ def register_master():
 
 @app.route(scope_name+'register_service',methods=['POST'])
 def register_service():
-        name = request.form['name']
+        name = request.form['name'].rstrip()
         price = request.form['price']
         if validate_name(name):
             service= session.query(Service).filter_by(name=name).first()
             if not service:
-                serivce=Service(name=name,price=price)
-                session.add(serivce)
+                service=Service(name=name,price=price)
+                session.add(service)
                 session.commit()
                 flash("Услуга успешно добавлена",'success')
-                
             else:
                 flash("Такая услуга уже есть!",'info')
         else:
