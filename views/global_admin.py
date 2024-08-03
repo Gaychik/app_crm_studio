@@ -14,6 +14,7 @@ def get_months():
 
 @app.route(scope_name)
 def global_admin_view():
+     locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
      selected_month=request.args.get('selected_month',datetime.datetime.now().strftime('%B'))
      months=get_months()
     #  appointments=session.query(Appointment).filter_by(status="Завершено").all()
@@ -133,6 +134,7 @@ def register_service():
                 session.add(service)
                 session.commit()
                 flash("Услуга успешно добавлена",'success')
+                
             else:
                 flash("Такая услуга уже есть!",'info')
         else:

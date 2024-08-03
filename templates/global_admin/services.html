@@ -3,7 +3,7 @@
 }}"> {% endblock %}
 {% block content %}
 <h1>Ваши виды услуг</h1>
-<form method="get" action="{{url_for('global_admin_view')}}" class="form-container">
+<form method="get" action="{{url_for('global_admin_services')}}" class="form-container">
     <label for="month">Выберите месяц</label><br>
     <select id="month" name="selected_month" class="dropdown">
         {% for name in months %}
