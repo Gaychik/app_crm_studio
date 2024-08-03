@@ -15,7 +15,8 @@ def profile_client(client_id):
         if not client.avatar:
            client.avatar="default.png"
         client.appointments=list(client.appointments)
-        handler_phone_master=re.sub(r'\D', '',client.master.phone)
+        if client.master:
+             handler_phone_master=re.sub(r'\D', '',client.master.phone)
      # Pagination
     per_page = 5
     page = request.args.get('page', 1, type=int)
